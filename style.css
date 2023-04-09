@@ -131,8 +131,6 @@ input {
   flex-wrap: nowrap;
 }
 
-
-
 #try input {
   width: 2.5rem;
   height: 2.5rem;
@@ -146,11 +144,18 @@ input {
   font-weight: 900;
 }
 
+/*#try input:focus {
+  border: 0.5rem solid #4C4347;
+}*/
 
 .try1 input, .try2 input, .try3 input, .try4 input, .try5 input, .try6 input {
   border: 0.125rem solid #4C4347;
   margin: 0rem;
 }
+
+/*textarea:focus, input:focus, select:focus {
+    outline: 0;
+}*/
 
 #try {
   display: flex;
@@ -203,5 +208,12 @@ input {
   transform: translate(-50%, -50%);
   font-size: 10vw;
   background: var(--colorRight);
+}
 
+@media screen and (max-width: 1000px) {
+  .letra, .enter, .backspace {
+    width: 1.75rem;
+    height: 1.25rem;
+    font-size: small;
+  }
 }
