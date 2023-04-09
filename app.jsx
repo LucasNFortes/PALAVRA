@@ -3,6 +3,7 @@ document.getElementById("year").innerHTML = new Date().getFullYear();
 let selectedInput = null;
 let palavraSecreta;
 let numTentativas = 1;
+var lista = ['Extraordinário 😱', 'Fantástico 😮', 'Genial 😲', 'Impressionante 👏', 'Parabéns 👍', 'Ufa 😰', 'Perdeu 💀'];
 
 document.addEventListener('DOMContentLoaded', () => {
     // Busca uma palavra aleatória do arquivo JSON
@@ -12,12 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let palavras = data.palavras;
             palavraSecreta = palavras[Math.floor(Math.random() * palavras.length)];
 
-            /* Exibe a palavra escolhida em um elemento HTML
+            /* Exibe a palavra escolhida em um elemento HTML*//*
             const palavraEscolhida = document.getElementById('palavra-escolhida');
-            palavraEscolhida.innerHTML = `Palavra escolhida: <strong>${palavraSecreta}</strong>`;
+            palavraEscolhida.innerHTML = `Palavra escolhida: <strong>${palavraSecreta}</strong>`;*/
 
             const inputInicio = document.querySelectorAll(getDivSelector(numTentativas) + 'input')[0];
-            inputInicio.focus();*/
+            inputInicio.focus();
         });
 });
 
@@ -31,6 +32,8 @@ function getDivSelector(numTentativa) {
     return `#try .try${numTentativa} `;
 }
 
+const proximaDiv = document.querySelector(getDivSelector(numTentativas) + ' + div');
+
 function verificarPalavra() {
     //Obtenha o valor dos campos de entrada na primeira div da seção "try".
     const camposDeEntrada = [...document.querySelectorAll(getDivSelector(numTentativas) + 'input')];
@@ -40,9 +43,16 @@ function verificarPalavra() {
     const palavraD = letras.join('');
     if ((palavraD.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()) !== (palavraSecreta.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) {
         document.querySelector(getDivSelector(numTentativas)).classList.add('respondido');
-        const proximaDiv = document.querySelector(getDivSelector(numTentativas) + ' + div');
-        proximaDiv.classList.remove('oculto');
+        if ((document.querySelector(getDivSelector(numTentativas) + ' + div')) !== null) {
+            proximaDiv = document.querySelector(getDivSelector(numTentativas) + ' + div');
+        } else {
+            proximaDiv = document.querySelector('.try6')
+        }
+        if (proximaDiv) {
+            proximaDiv.classList.remove('oculto');
+          }    
         numTentativas++;
+        console.log(numTentativas);
         const primeiroInput = proximaDiv.querySelector('input');
         primeiroInput.focus();
 
@@ -68,12 +78,23 @@ function verificarPalavra() {
                 }
             }
         });
+        if (numTentativas > 6) {
+            var nota = lista[numTentativas-1];
+            var alertBox = document.createElement('section');
+            alertBox.innerHTML = nota;
+            document.body.appendChild(alertBox);
+            alertBox.classList.add('alert');
+            setTimeout(function () {
+                alertBox.remove();
+            }, 2000);
+        }
     } else {
         document.querySelectorAll(getDivSelector(numTentativas) + 'input').forEach((campo) => {
             campo.classList.add('certo');
         });
+        var nota = lista[numTentativas-1];
         var alertBox = document.createElement('section');
-        alertBox.innerHTML = 'Parabéns!!!';
+        alertBox.innerHTML = nota;
         document.body.appendChild(alertBox);
         alertBox.classList.add('alert');
         setTimeout(function () {

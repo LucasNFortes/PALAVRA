@@ -22,6 +22,7 @@ body {
   width: 100%;
   height: calc(100% - var(--inset));
   margin-top: var(--inset);
+  overflow: hidden;
 }
 
 a {
@@ -62,7 +63,7 @@ img {
 }
 
 #footer .site-info {
-  font-size: 15px;
+  font-size: 10px;
   display: inline-block;
 }
 
@@ -80,6 +81,7 @@ button {
   padding: 0;
   text-align: left;
   cursor: pointer;
+  margin: 0;
 }
 
 input {
@@ -102,6 +104,7 @@ input {
   justify-content: center;
   align-items: center;
   font-weight: 500;
+  pointer-events: none;
 }
 
 .letra, .enter, .backspace {
@@ -114,6 +117,9 @@ input {
   border-radius: 8%;
   box-sizing: border-box;
   flex-shrink: 0;
+  padding: 1rem;
+  line-height: 0rem;
+  pointer-events: all;
 }
 
 .enter {
@@ -144,18 +150,21 @@ input {
   font-weight: 900;
 }
 
-/*#try input:focus {
-  border: 0.5rem solid #4C4347;
-}*/
+#try input:focus {
+  border-bottom: 0.5rem solid #4C4347;
+  transform: translateY(-3px);
+  margin-bottom: -3px;
+}
 
 .try1 input, .try2 input, .try3 input, .try4 input, .try5 input, .try6 input {
   border: 0.125rem solid #4C4347;
   margin: 0rem;
+  box-sizing: border-box;
 }
 
-/*textarea:focus, input:focus, select:focus {
-    outline: 0;
-}*/
+textarea:focus, input:focus, select:focus {
+  outline: 0;
+}
 
 #try {
   display: flex;
@@ -190,24 +199,18 @@ input {
   pointer-events: none;
 }
 
-#infos {
-  position: absolute;
-  justify-self: center;
-  top: 80%; bottom: 10%;
-  left: 40%; right: 40%;
-  margin: auto;
-}
-
 .alert {  
   color: black;
   padding: 10px;
   border-radius: 5px;
   position: absolute;
+  text-align: center;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 10vw;
   background: var(--colorRight);
+  border: 0.125rem solid var(--colorWrong);
 }
 
 @media screen and (max-width: 1000px) {
@@ -223,12 +226,38 @@ input {
   margin-left: 0.25rem;
   }
 
-  backspace {
+  .backspace {
   width: 2rem;
   margin-left: 0.25rem;
   }
   #try input {
   width: 3.5rem;
   height: 3.5rem;
+  }
+}
+
+input.respondido, input.certo, input.quase, input.errou {
+  animation: girar 0.5s ease-in-out;
+}
+
+input:focus {
+  animation: zoom 5s ease;
+}
+
+@keyframes girar {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes zoom {
+  0%, 100% {
+    scale: ();
+  }
+  50% {
+    scale: (2.05);
   }
 }
