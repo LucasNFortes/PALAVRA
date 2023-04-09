@@ -213,7 +213,22 @@ input {
 @media screen and (max-width: 1000px) {
   .letra, .enter, .backspace {
     width: 1.75rem;
-    height: 1.25rem;
-    font-size: small;
+    height: 4rem;
+    font-size:large;
+    margin: 0.05rem;
+    padding: 0;
+  }
+  .enter {
+  width: 3rem;
+  margin-left: 0.25rem;
+  }
+
+  backspace {
+  width: 2rem;
+  margin-left: 0.25rem;
+  }
+  #try input {
+  width: 4rem;
+  height: 4rem;
   }
 }
