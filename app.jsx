@@ -32,7 +32,7 @@ function getDivSelector(numTentativa) {
     return `#try .try${numTentativa} `;
 }
 
-const proximaDiv = document.querySelector(getDivSelector(numTentativas) + ' + div');
+let proximaDiv = document.querySelector(getDivSelector(numTentativas) + ' + div');
 
 function verificarPalavra() {
     //Obtenha o valor dos campos de entrada na primeira div da seção "try".
