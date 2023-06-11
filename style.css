@@ -30,7 +30,7 @@ a {
 }
 header a {
   font-size: 1.5rem;
-  margin-top: -20px;
+  margin-top: -10px;
 }
 
 h1 {
@@ -243,7 +243,7 @@ textarea:focus, input:focus, select:focus {
   }
 }
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1000px) {
   .letra, .enter, .backspace {
     width: 4rem;
     height: 4rem;
@@ -292,4 +292,17 @@ input.respondido, input.certo, input.quase, input.errou {
 
 .certo-teclado {
   background: var(--colorRight);
+}
+
+#reiniciar {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: -0.3rem;
 }
