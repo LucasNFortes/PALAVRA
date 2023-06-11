@@ -115,7 +115,7 @@ input {
   height: 2rem;
   background-color: transparent;
   text-align: center;
-  margin: 0.1rem;
+  margin: 1rem;
   background-color: #4C4347;
   border-radius: 8%;
   box-sizing: border-box;
@@ -220,21 +220,21 @@ textarea:focus, input:focus, select:focus {
   border: 0.125rem solid #4C4347;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 750px) {
   .letra, .enter, .backspace {
-    width: 1.75rem;
-    height: 4rem;
+    width: 6.5vw;
+    height: 3rem;
     font-size:large;
     margin: 0.05rem;
     padding: 0;
   }
   .enter {
-    width: 3rem;
+    min-width: 3rem;
     margin-left: 0.25rem;
   }
 
   .backspace {
-    width: 2rem;
+    min-width: 3rem;
     margin-left: 0.25rem;
   }
   #try input {
