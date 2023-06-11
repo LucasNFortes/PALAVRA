@@ -54,6 +54,9 @@ function verificarPalavra() {
             palavras = data.palavras;
 
             if (palavras.some(palavra => removerAcentos(palavra).toLowerCase() === removerAcentos(palavraD).toLowerCase())) {
+                /*substituir as letras da palavraD pelas letras da palavra existente na lista palavras.json*/
+
+
                 if ((palavraD.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase()) !== (palavraSecreta.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase())) {
                     document.querySelector(getDivSelector(numTentativas)).classList.add('respondido');
                     if ((document.querySelector(getDivSelector(numTentativas) + ' + div')) !== null) {
@@ -71,14 +74,8 @@ function verificarPalavra() {
 
                     document.querySelectorAll(getDivSelector(numTentativas - 1) + 'input').forEach((campo) => {
                         if (removerAcentos(palavraSecreta).toLowerCase().includes(removerAcentos(campo.value).toLowerCase())) {
-                            while (campo.classList.length > 0) {
-                                campo.classList.remove(campo.classList.item(0));
-                            }
                             campo.classList.add('quase');
                         } else {
-                            while (campo.classList.length > 0) {
-                                campo.classList.remove(campo.classList.item(0));
-                            }
                             campo.classList.add('errou');
                         }
 
@@ -95,13 +92,10 @@ function verificarPalavra() {
                             }
                         });
 
-
                         for (let i = 0; i < palavraSecreta.length; i++) {
                             if (i < camposDeEntrada.length && (removerAcentos(campo.value).toLowerCase()) === removerAcentos(palavraSecreta).toLowerCase()[i] && i === camposDeEntrada.indexOf(campo)) {
-                                while (campo.classList.length > 0) {
-                                    campo.classList.remove(campo.classList.item(0));
-                                }
                                 campo.classList.add('certo');
+                                campo.classList.remove('quase');
                                 document.querySelectorAll('.teclado button').forEach(botao => {
                                     if (removerAcentos(botao.textContent).toLowerCase() === (removerAcentos(campo.value).toLowerCase())) {
                                         botao.classList.remove('errou-teclado');
@@ -115,8 +109,10 @@ function verificarPalavra() {
                         if (numTentativas > 6) {
                             // Desativa cada um dos botões encontrados
                             buttons.forEach(button => {
-                                button.disabled = true;
-                            });
+                                if (button.id !== 'reiniciar') {
+                                  button.disabled = true;
+                                }
+                              });
 
                             var alertBox = document.createElement('section');
                             alertBox.innerHTML = `Perdeu 💀 <br> <br> A palavra era <strong>${palavraSecreta.toUpperCase()}</strong>`;
@@ -143,8 +139,10 @@ function verificarPalavra() {
 
                     // Desativa cada um dos botões encontrados
                     buttons.forEach(button => {
-                        button.disabled = true;
-                    });
+                        if (button.id !== 'reiniciar') {
+                          button.disabled = true;
+                        }
+                      });
                 }
             } else {
                 var alertBox = document.createElement('section');
@@ -157,6 +155,7 @@ function verificarPalavra() {
             }
         });
 };
+
 
 document.querySelectorAll('.letra, .backspace, .enter').forEach(botao => {
     botao.addEventListener('click', () => {
